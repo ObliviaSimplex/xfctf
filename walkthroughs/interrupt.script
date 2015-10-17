@@ -1,0 +1,367 @@
+Script started on Mon 21 Sep 2015 04:45:34 PM UTC
+[00;31m++++++++++[>+++++++++++>++++++++++>++++++++++>+++++++++++>++++++++++++>+++++++++++>++++++++++>++++++++++>++++++++++++>(( [01;31mBRAINFUCK ME [00;31m ))++++++++++>+++++++++++>+++++++++++>++++++++++>+++++++++++>++++++++++++>+++++>+++++++++++>++++++++++>++++++++++++<<<<<<<<<<<<<<<<<<<-]>--.>---.>--.>+.>------.>-----.>---.>-.>---.>--.>+.>.>+++++.>---.>-----.>----.>.>+.>----.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ~[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls
+[0m[01;34mmanifesto[0m  README
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ~[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcat README 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+HOW IT WORKS:
+
+Each subdirectory of manifesto/ contains a means of accessing a section of
+the text, but access requires you to uncover a steganographically embedded
+message, decrypt an encryption, or discover and exploit a vulnerability in
+an executable binary. Many useful tools can be found on this server -- try
+"apropos <keyword>" to search the manpages of the installed programmes for
+this or that desired use. Some of the most useful include
+
+gdb
+strings
+objdump
+ltrace
+strace
+
+among others. Details on almost any command or utility -- and a great many
+C keywords, which is good to remember since most of the challenges here were
+written in C -- can be found by typing "man <keyword>" at the command line.
+If this is your first time playing an online capture-the-flag-style challenge,
+we're honoured to have you here. Have fun. If you find the challenges a bit
+*too* challenging, you can train up on sites like overthewire.org first (their
+bandit levels provide a very friendly on-ramp to the world of server-side
+hacking). If you find them a bit too easy, be patient. We didn't want the
+manifesto to be completely inaccessible, so erred on the side of accessibility. 
+Expect to find more challenging xenofem-related vulns to exploit & puzzles to
+crack up on this server in the near future. 
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Is something not working the way it should? It's possible that there's a bug
+in the challenge somewhere. If you need help, just save a "help-me" message in
+the /tmp folder, with a filename starting with "help-". Please don't overwrite
+other users' help notes. I'll try to respond to them when I can, and add my
+answers to FAQs to this readme. 
+
+The /tmp directory is free for you all to use in solving the challenges. You
+should be able to download any readable file to your own machine using scp,
+which may be helpful in the more steganographic or forensic - style challenges.
+
+Have fun! 
+
+Laboria Cuboniks
+
+PS: You can contact the author of these challenges on twitter at @0xDEBA5E12
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ~[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcd manifesto/
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m manifesto[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls *
+ADJUST:
+[0m[37;41madjust[0m  adjust.c  hint
+
+CARRY:
+[01;35mcarry.jpg[0m  hint
+
+INTERRUPT:
+hint  [37;41minterrupt[0m  interrupt.txt
+
+OVERFLOW:
+hint  [37;41moverflow[0m  overflow.txt
+
+PARITY:
+hint  [01;32mparity[0m
+
+TRAP:
+hint  [00;36mtrap.wav[0m
+
+ZERO:
+hint  [30;43mzero[0m  zero.txt
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m manifesto[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcd INTERRUPT/
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls
+hint  [0m[37;41minterrupt[0m  interrupt.txt
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./[K[Kcat j[Khint 
+What do you notice if you run this programme over and over again?
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m./interrupt 
+Time: 1442854032
+Enter filename: foobar
+
+I'm sorry, it's terribly noisy in here. Did you say ypp}~m?
+ypp}~m not found!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m./interrupt foobar
+Time: 1442854043
+Enter filename: foobar
+
+I'm sorry, it's terribly noisy in here. Did you say QXXUVE?
+QXXUVE not found!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mecho "Okay, so it seems that our filene[Kame is getting scrambled with a random xor key, doesn't it? [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kkey, doesn't it? [K"
+Okay, so it seems that our filename is getting scrambled with a random key, doesn't it?
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "See how both times, [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kecho "I'd[K[K[KTo be precei[K[Kise, I'd say a s[Kxor key. [K If you like, you can look up the ASCII values of the characters in play here, and confirm that the scrambled versio n is the result of xor-ing each character by a single, [K[K (randomly chosen?) character."
+To be precise, I'd say a xor key. If you like, you can look up the ASCII values of the characters in play here, and confirm that the scrambled version is the result of xor-ing each character by a single (randomly chosen?) character.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "but how can we anticipate the key in advance? If we can figure out the key, then we can foil the scrambling." 
+but how can we anticipate the key in advance? If we can figure out the key, then we can foil the scrambling.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "How? Well, the thing about xor is that A xor B xor [K[K[K[K[K[K[K[K[K[K[K[Kit undoes itself. [K[K: A xor B)[C[1@([C[C[C[C[C[C[C[C xor B = A."
+How? Well, the thing about xor is that it undoes itself: (A xor B) xor B = A.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [ms[Kcheck this out[C[C[C[C[1@e[C[1@c[1@h[1@o[1@ 
+check this out
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mfor i in {0..10}; do echo foobar | ./interrupt; done
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+Time: 1442854344
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ÂËËÆÅÖ?
+ÂËËÆÅÖ not found!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mfor i in {0..10}; do echo foobar | ./interrupt; done
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+Time: 1442854351
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ËÂÂÏÌß?
+ËÂÂÏÌß not found!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mfor i in {0..10}; do echo foobar | ./interrupt; done
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+Time: 1442854366
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say ôýýðóà?
+ôýýðóà not found!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mecho "The point is that , if[K[K[K[K[K[Kt, if we're quick enough, the random key (which is set by the timer -- that's why you're told the time each time the program runs. It 's a hint.)[K[K) hasn[K[K[K[Kwon't have time to change."
+The point is that, if we're quick enough, the random key (which is set by the timer -- that's why you're told the time each time the program runs. It's a hint) won't have time to change.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "if the random key doens[K[Ksn't change, te[Khen we can exploit the reversibility of xor (A xor B xor B = A). [K"
+if the random key doesn't change, then we can exploit the reversibility of xor (A xor B xor B = A).
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "the trick will be to grab the output of the program[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K, and then throw it be[Kack in as input, in less than a second."
+the trick will be to grab the output, and then throw it back in as input, in less than a second.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "we don't want to tdo this by hand."
+we don't want to tdo this by hand.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho "oh, and s[Ksince the program takes input from strd[K[Kandard[K[K[K[K[K[Kdin, we can just pipe an echo as input.[K, and we won't be prompted."
+oh, and since the program takes input from stdin, we can just pipe an echo as input, and we won't be prompted.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mec[K[Kf[Kf[K./interrupt[K[K[K[K[K[K[K[K[K[K[Kecho interrupt.txt | i[K./interrupt
+Time: 1442854573
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say xbsddcfb8bnb?
+xbsddcfb8bnb not found!
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [me[Kecho this what we'll be working with. but it just tkes a[K[K[K[K[Kakes a little bit of scripting to grab that output off the last la[Kine.
+[00;31m| [m"[K'
+this what well be working with. but it just takes a little bit of scripting to grab that output off the last line.
+
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho this what we'll be working with. but it just takes a little bit of scripting to grab that output off the last line.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho interrupt[K[K[K[K[K[K[K[K[K[K[K[K[K[K./interrupt [K[K[K[K[K[K[K[K[K[K[K[Kecho interrupt.txt | ./interrupt | tail -n1 | cut -d " " -f 1 | ./interrupt
+Time: 1442854729
+Enter filename: 
+I'm sorry, it's terribly noisy in here. Did you say interrupt.txt?
+Opening interrupt.txt
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+             _       _                             _   
+            (_)_ __ | |_ ___ _ __ _ __ _   _ _ __ | |_ 
+            | | '_ \| __/ _ \ '__| '__| | | | '_ \| __|
+            | | | | | ||  __/ |  | |  | |_| | |_) | |_ 
+            |_|_| |_|\__\___|_|  |_|   \__,_| .__/ \__|
+                                            |_|        
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+0x05 The excess of modesty in feminist agendas of recent decades is
+not proportionate to the monstrous complexity of our reality, a
+reality crosshatched with fibre-optic cables, radio and microwaves,
+oil and gas pipelines, aerial and shipping routes, and the
+unrelenting, simultaneous execution of millions of communication
+protocols with every passing millisecond. Systematic thinking and
+structural analysis have largely fallen by the wayside in favour of
+admirable, but insufficient struggles, bound to fixed localities and
+fragmented insurrections. Whilst capitalism is understood as a complex
+and ever-expanding totality, many would-be emancipatory
+anti-capitalist projects remain profoundly fearful of transitioning to
+the universal, resisting big-picture speculative politics by
+condemning them as necessarily oppressive vectors. Such a false
+guarantee treats universals as absolute, generating a debilitating
+disjuncture between the thing we seek to depose and the strategies we
+advance to depose it.
+
+
+0x06 Global complexity opens us to urgent cognitive and ethical
+demands. These are Promethean responsibilities that cannot pass
+unaddressed. Much of twenty-first century feminism--from the remnants
+of postmodern identity politics to large parts of contemporary
+ecofeminism--struggles to adequately address these challenges in a
+manner capable of producing substantial and enduring
+change. Xenofeminism endeavours to face up to these obligations as
+collective agents capable of transitioning between multiple levels of
+political, material and conceptual organisation.
+ 
+
+0x07 We are adamantly synthetic, unsatisfied by analysis alone. XF
+urges constructive oscillation between description and prescription to
+mobilize the recursive potential of contemporary technologies upon
+gender, sexuality and disparities of power. Given that there are a
+range of gendered challenges specifically relating to life in a
+digital age--from sexual harassment via social media, to doxxing,
+privacy, and the protection of online images--the situation requires a
+feminism at ease with computation. Today, it is imperative that we
+develop an ideological infrastructure that both supports and
+facilitates feminist interventions within connective, networked
+elements of the contemporary world. Xenofeminism is about more than
+digital self-defence, and freedom from patriarchal networks. We assert
+the exercise of positive freedom--freedom-to rather than simply
+freedom-from--and urge feminists to equip themselves with the skills
+to redeploy existing technologies and invent novel cognitive and
+material tools in the service of common ends.
+ 
+
+0x08 The radical opportunities afforded by developing (and alienating)
+forms of technological mediation should no longer be put to use in the
+exclusive interests of capital, which, by design, only benefit the
+few. There are incessantly proliferating tools to be annexed, and
+although no one can claim their comprehensive accessibility, digital
+tools have never been more widely available or more sensitive to
+appropriation than they are today. This is not an elision of the fact
+that a large amount of the world's poor is adversely affected by the
+expanding technological industry (from Foxconn workers labouring under
+abominable conditions to the Ghanaian villages that have become a
+repository for the first world's e-waste) but an explicit
+acknowledgement of these conditions as a target for elimination. Just
+as the invention of the stock market was also the invention of the
+crash, XF knows that technological innovation must equally anticipate
+its systemic condition responsively.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mecho booyah
+booyah
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m INTERRUPT[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mexit
+
+Script done on Mon 21 Sep 2015 04:59:06 PM UTC

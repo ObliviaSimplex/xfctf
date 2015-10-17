@@ -1,0 +1,125 @@
+Script started on Fri 02 Oct 2015 06:39:33 PM ADT
+[01;34m-=oO( [00;34m0[01;34m )( [00;34m18:39[01;34m )([00;34m user@machine[01;34m ~[01;34m )Oo=-[00;34m
+[01;34m* [mssh ctf@52.11.142.11 -p 1337
+ctf@52.11.142.11's password: 
+Permission denied, please try again.
+ctf@52.11.142.11's password: 
+Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+  System information as of Fri Oct  2 21:44:27 UTC 2015
+
+  System load:  0.0               Processes:           112
+  Usage of /:   29.4% of 7.74GB   Users logged in:     1
+  Memory usage: 19%               IP address for eth0: 172.31.22.52
+  Swap usage:   0%
+
+  Graph this data and manage this system at:
+    https://landscape.canonical.com/
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+
+Last login: Fri Oct  2 21:28:32 2015 from hlfxns016cw-142167171117.dhcp-dynamic.fibreop.ns.bellaliant.net
+[00;31m++++++++++[>+++++++++++>++++++++++>++++++++++>+++++++++++>++++++++++++>+++++++++++>++++++++++>++++++++++>++++++++++++>(( [01;31mBRAINFUCK ME [00;31m ))++++++++++>+++++++++++>+++++++++++>++++++++++>+++++++++++>++++++++++++>+++++>+++++++++++>++++++++++>++++++++++++<<<<<<<<<<<<<<<<<<<-]>--.>---.>--.>+.>------.>-----.>---.>-.>---.>--.>+.>.>+++++.>---.>-----.>----.>.>+.>----.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m ~[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcd manifesto/
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m manifesto[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls
+[0m[01;34mADJUST[0m  [01;34mCARRY[0m  [01;34mINTERRUPT[0m  [01;34mOVERFLOW[0m  [01;34mPARITY[0m  [01;34mTRAP[0m  [01;34mZERO[0m
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m manifesto[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcd C[KTRAP/
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls
+hint  [0m[00;36mtrap.wav[0m
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls -lha
+total 996K
+drwxr-xr-x 2 bdm  bdm  4.0K Jun  6 21:37 [0m[01;34m.[0m
+drwxr-x--- 9 ctf  ctf  4.0K Jun 11 21:17 [01;34m..[0m
+-rw-r--r-- 1 root root   14 Jun  6 21:37 hint
+-rw-r--r-- 1 trap trap 982K Jun  6 03:10 [00;36mtrap.wav[0m
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mstrings trap.wav | grep http
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mstrings trap.wav | grep http[K[K[K[Kca[K[Ktrap
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [maplay trap.wav 
+ALSA lib confmisc.c:768:(parse_card) cannot find card '0'
+ALSA lib conf.c:4248:(_snd_config_evaluate) function snd_func_card_driver returned error: No such file or directory
+ALSA lib confmisc.c:392:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:4248:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1251:(snd_func_refer) error evaluating name
+ALSA lib conf.c:4248:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:4727:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2239:(snd_pcm_open_noupdate) Unknown PCM default
+aplay: main:722: audio open error: No such file or directory
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m# okay. I guess we'll have to download it before we can listen to it. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m# try it
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [m# it won't help
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mls
+hint  [0m[00;36mtrap.wav[0m
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mmkdir /tmp/foobar
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcp trap.wav $_
+cp: cannot create regular file ‘_filedir’: Permission denied
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;31m=[01;31m=> [mcp trap.wave[K /tmp/foobar
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m TRAP[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcd $_
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m foobar[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# that $_ just means "the last argument in the previous line". usually it works, and is a nice shortcut. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m foobar[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mcd[K[Kcd[K[Kls
+[0m[00;36mtrap.wav[0m
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m foobar[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# no[K[K[K[Kcat ~/manifesto/C[KTRAP/hint
+Synaesthesia.
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m foobar[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# and it's a wav file, so, well, it seems that looking for an [K[K[K[K[K[K[Kat it as an image might be informative. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m foobar[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m# there are a handful of programmes that do this. 
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m foobar[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [m$#[K[K# I like arss
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m foobar[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [marss
+The Analysis & Resynthesis Sound Spectrograph 0.2.3
+Type 'help' to read the manual page
+Input file : tr	ap.wav
+Output file : trap.bmp
+Min. frequency (Hz) [27.500]: 
+Bands per octave [12.000]: 
+Max. frequency (Hz) (up to 19912.127) [19912.000]: 
+Bands : 115
+Pixels per second [150.000]: 
+Image size : 854x115
+   1/115 (FFT size:   1944)   25.93 Hz - 29.17 Hz   2/115 (FFT size:   1944)   27.47 Hz - 30.86 Hz   3/115 (FFT size:   1944)   29.17 Hz - 32.72 Hz   4/115 (FFT size:   1944)   30.86 Hz - 34.65 Hz   5/115 (FFT size:   1944)   32.72 Hz - 36.73 Hz   6/115 (FFT size:   1944)   34.65 Hz - 38.89 Hz   7/115 (FFT size:   1944)   36.73 Hz - 41.20 Hz   8/115 (FFT size:   1944)   38.89 Hz - 43.67 Hz   9/115 (FFT size:   1944)   41.20 Hz - 46.22 Hz  10/115 (FFT size:   1944)   43.67 Hz - 49.00 Hz  11/115 (FFT size:   1944)   46.22 Hz - 51.93 Hz  12/115 (FFT size:   1944)   49.00 Hz - 55.02 Hz  13/115 (FFT size:   1944)   51.93 Hz - 58.26 Hz  14/115 (FFT size:   1944)   55.02 Hz - 61.73 Hz  15/115 (FFT size:   1944)   58.26 Hz - 65.43 Hz  16/115 (FFT size:   1944)   61.73 Hz - 69.29 Hz  17/115 (FFT size:   1944)   65.43 Hz - 73.38 Hz  18/115 (FFT size:   1944)   69.29 Hz - 77.78 Hz  19/115 (FFT size:   1944)   73.38 Hz - 82.41 Hz  20/115 (FFT size:   1944)   77.78 Hz - 87.27 Hz  21/115 (FFT size:   1944)   82.41 Hz - 92.52 Hz  22/115 (FFT size:   1944)   87.27 Hz - 97.99 Hz  23/115 (FFT size:   1944)   92.52 Hz - 103.86 Hz  24/115 (FFT size:   1944)   97.99 Hz - 110.03 Hz  25/115 (FFT size:   1944)   103.86 Hz - 116.51 Hz  26/115 (FFT size:   1944)   110.03 Hz - 123.46 Hz  27/115 (FFT size:   1944)   116.51 Hz - 130.79 Hz  28/115 (FFT size:   1944)   123.46 Hz - 138.58 Hz  29/115 (FFT size:   1944)   130.79 Hz - 146.84 Hz  30/115 (FFT size:   1944)   138.58 Hz - 155.56 Hz  31/115 (FFT size:   1944)   146.84 Hz - 164.81 Hz  32/115 (FFT size:   1944)   155.56 Hz - 174.61 Hz  33/115 (FFT size:   1944)   164.81 Hz - 185.03 Hz  34/115 (FFT size:   1944)   174.61 Hz - 195.99 Hz  35/115 (FFT size:   1944)   185.03 Hz - 207.64 Hz  36/115 (FFT size:   1944)   195.99 Hz - 219.98 Hz  37/115 (FFT size:   1944)   207.64 Hz - 233.10 Hz  38/115 (FFT size:   1944)   219.98 Hz - 246.91 Hz  39/115 (FFT size:   1944)   233.10 Hz - 261.65 Hz  40/115 (FFT size:   1944)   246.91 Hz - 277.16 Hz  41/115 (FFT size:   1944)   261.65 Hz - 293.67 Hz  42/115 (FFT size:   1944)   277.16 Hz - 311.11 Hz  43/115 (FFT size:   1944)   293.67 Hz - 329.63 Hz  44/115 (FFT size:   1944)   311.11 Hz - 349.23 Hz  45/115 (FFT size:   1944)   329.63 Hz - 369.98 Hz  46/115 (FFT size:   1944)   349.23 Hz - 391.98 Hz  47/115 (FFT size:   1944)   369.98 Hz - 415.28 Hz  48/115 (FFT size:   1944)   391.98 Hz - 439.97 Hz  49/115 (FFT size:   1944)   415.28 Hz - 466.13 Hz  50/115 (FFT size:   1944)   439.97 Hz - 493.90 Hz  51/115 (FFT size:   1944)   466.13 Hz - 523.23 Hz  52/115 (FFT size:   1944)   493.90 Hz - 554.40 Hz  53/115 (FFT size:   1944)   523.23 Hz - 587.35 Hz  54/115 (FFT size:   1944)   554.40 Hz - 622.22 Hz  55/115 (FFT size:   1944)   587.35 Hz - 659.26 Hz  56/115 (FFT size:   2048)   622.22 Hz - 698.46 Hz  57/115 (FFT size:   2187)   659.26 Hz - 739.97 Hz  58/115 (FFT size:   2304)   698.46 Hz - 784.03 Hz  59/115 (FFT size:   2592)   739.97 Hz - 830.63 Hz  60/115 (FFT size:   2592)   784.03 Hz - 880.02 Hz  61/115 (FFT size:   2916)   830.63 Hz - 932.33 Hz  62/115 (FFT size:   2916)   880.02 Hz - 987.73 Hz  63/115 (FFT size:   3072)   932.33 Hz - 1046.53 Hz  64/115 (FFT size:   3456)   987.73 Hz - 1108.72 Hz  65/115 (FFT size:   3456)   1046.53 Hz - 1174.69 Hz  66/115 (FFT size:   3888)   1108.72 Hz - 1244.52 Hz  67/115 (FFT size:   3888)   1174.69 Hz - 1318.52 Hz  68/115 (FFT size:   4096)   1244.52 Hz - 1396.91 Hz  69/115 (FFT size:   4374)   1318.52 Hz - 1480.02 Hz  70/115 (FFT size:   4608)   1396.91 Hz - 1567.98 Hz  71/115 (FFT size:   5184)   1480.02 Hz - 1661.19 Hz  72/115 (FFT size:   5184)   1567.98 Hz - 1760.03 Hz  73/115 (FFT size:   5832)   1661.19 Hz - 1864.66 Hz  74/115 (FFT size:   5832)   1760.03 Hz - 1975.54 Hz  75/115 (FFT size:   6144)   1864.66 Hz - 2092.98 Hz  76/115 (FFT size:   6561)   1975.54 Hz - 2217.44 Hz  77/115 (FFT size:   6912)   2092.98 Hz - 2349.31 Hz  78/115 (FFT size:   7776)   2217.44 Hz - 2489.04 Hz  79/115 (FFT size:   7776)   2349.31 Hz - 2637.04 Hz  80/115 (FFT size:   8192)   2489.04 Hz - 2793.83 Hz  81/115 (FFT size:   8748)   2637.04 Hz - 2959.95 Hz  82/115 (FFT size:   9216)   2793.83 Hz - 3135.96 Hz  83/115 (FFT size:  10368)   2959.95 Hz - 3322.45 Hz  84/115 (FFT size:  10368)   3135.96 Hz - 3519.98 Hz  85/115 (FFT size:  11664)   3322.45 Hz - 3729.32 Hz  86/115 (FFT size:  11664)   3519.98 Hz - 3951.08 Hz  87/115 (FFT size:  12288)   3729.32 Hz - 4186.03 Hz  88/115 (FFT size:  13122)   3951.08 Hz - 4434.95 Hz  89/115 (FFT size:  13824)   4186.03 Hz - 4698.61 Hz  90/115 (FFT size:  15552)   4434.95 Hz - 4978.01 Hz  91/115 (FFT size:  15552)   4698.61 Hz - 5274.07 Hz  92/115 (FFT size:  16384)   4978.01 Hz - 5587.65 Hz  93/115 (FFT size:  17496)   5274.07 Hz - 5919.91 Hz  94/115 (FFT size:  18432)   5587.65 Hz - 6271.91 Hz  95/115 (FFT size:  19683)   5919.91 Hz - 6644.91 Hz  96/115 (FFT size:  20736)   6271.91 Hz - 7039.97 Hz  97/115 (FFT size:  23328)   6644.91 Hz - 7458.64 Hz  98/115 (FFT size:  23328)   7039.97 Hz - 7902.16 Hz  99/115 (FFT size:  24576)   7458.64 Hz - 8371.99 Hz 100/115 (FFT size:  26244)   7902.16 Hz - 8869.83 Hz 101/115 (FFT size:  27648)   8371.99 Hz - 9397.30 Hz 102/115 (FFT size:  31104)   8869.83 Hz - 9956.10 Hz 103/115 (FFT size:  31104)   9397.30 Hz - 10548.07 Hz 104/115 (FFT size:  32768)   9956.10 Hz - 11175.31 Hz 105/115 (FFT size:  34992)   10548.07 Hz - 11839.81 Hz 106/115 (FFT size:  36864)   11175.31 Hz - 12543.83 Hz 107/115 (FFT size:  39366)   11839.81 Hz - 13289.74 Hz 108/115 (FFT size:  41472)   12543.83 Hz - 14080.02 Hz 109/115 (FFT size:  46656)   13289.74 Hz - 14917.21 Hz 110/115 (FFT size:  46656)   14080.02 Hz - 15804.24 Hz 111/115 (FFT size:  49152)   14917.21 Hz - 16744.06 Hz 112/115 (FFT size:  52488)   15804.24 Hz - 17739.66 Hz 113/115 (FFT size:  55296)   16744.06 Hz - 18794.52 Hz 114/115 (FFT size:  59049)   17739.66 Hz - 19912.11 Hz 115/115 (FFT size:  62208)   18794.52 Hz - 21096.14 Hz
+Processing time : 1.730 s
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m foobar[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mls
+[0m[01;35mtrap.bmp[0m  [00;36mtrap.wav[0m
+[01;32m-=oO( [00;32m0[01;32m )([00;32m ctf@cuboniks[01;32m foobar[01;32m )Oo=-[00;32m
+[00;32m=[01;32m=> [mlogout
+Connection to 52.11.142.11 closed.
+[01;34m-=oO( [00;34m0[01;34m )( [00;34m18:42[01;34m )([00;34m user@machine[01;34m ~[01;34m )Oo=-[00;34m
+[01;34m* [mscp ctf@[K[K[K[K-P 1337 ctf@52.11.142.11:/tmp/foobar/trap.* .
+ctf@52.11.142.11's password: 
+trap.bmp                                                                                                             0%    0     0.0KB/s   0.0KB/s   --:-- ETAtrap.bmp                                                                                                            38%  112KB 112.0KB/s 112.0KB/s   00:01 ETAtrap.bmp                                                                                                           100%  288KB 288.0KB/s 176.0KB/s   00:01    
+trap.wav                                                                                                             0%    0     0.0KB/s -287.-9KB/s   --:-- Etrap.wav                                                                                                            24%  240KB 240.0KB/s 240.0KB/s   00:03 ETAtrap.wav                                                                                                            43%  432KB 235.2KB/s 192.0KB/s   00:02 ETAtrap.wav                                                                                                            89%  880KB 256.5KB/s 448.0KB/s   00:00 ETAtrap.wav                                                                                                           100%  982KB 327.3KB/s 448.0KB/s   00:03    
+[01;34m-=oO( [00;34m0[01;34m )( [00;34m18:43[01;34m )([00;34m user@machine[01;34m ~[01;34m )Oo=-[00;34m
+[00;31m* [mfeh trap.bmp 
+[01;34m-=oO( [00;34m0[01;34m )( [00;34m18:44[01;34m )([00;34m user@machine[01;34m ~[01;34m )Oo=-[00;34m
+[01;34m* [m# that was so cool!
+[01;34m-=oO( [00;34m0[01;34m )( [00;34m18:44[01;34m )([00;34m user@machine[01;34m ~[01;34m )Oo=-[00;34m
+[01;34m* [m# now type in the address you saw, and (in[Kf infotomb is cooperating today), you'll find the payload. 
+[01;34m-=oO( [00;34m0[01;34m )( [00;34m18:44[01;34m )([00;34m user@machine[01;34m ~[01;34m )Oo=-[00;34m
+[01;34m* [mexit
+
+Script done on Fri 02 Oct 2015 06:44:41 PM ADT
